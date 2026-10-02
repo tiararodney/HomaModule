@@ -1229,9 +1229,12 @@ ssize_t __modver_version_show(const struct module_attribute *a,
 	return 0;
 }
 
+/* 6.19 turned __mutex_init() into a static inline in linux/mutex.h. */
+#if LINUX_VERSION_CODE < KERNEL_VERSION(6, 19, 0)
 void __mutex_init(struct mutex *lock, const char *name,
 			 struct lock_class_key *key)
 {}
+#endif
 
 #ifdef CONFIG_DEBUG_LOCK_ALLOC
 void mutex_lock_nested(struct mutex *lock, unsigned int subclass)
