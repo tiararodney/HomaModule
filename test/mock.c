@@ -1242,6 +1242,10 @@ void __mutex_init(struct mutex *lock, const char *name,
 {}
 #endif
 
+/* 6.19's static inline __mutex_init() calls mutex_init_generic(). */
+void mutex_init_generic(struct mutex *lock)
+{}
+
 #ifdef CONFIG_DEBUG_LOCK_ALLOC
 void mutex_lock_nested(struct mutex *lock, unsigned int subclass)
 #else
